@@ -1,0 +1,362 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Modern Portfolio Design System - Professional Dark Theme with Tech Accents
+All colors MUST be HSL. Focus on technical credibility with approachable warmth.
+*/
+
+@layer base {
+  :root {
+    /* Light theme - Warm and approachable */
+    --background: 0 0% 99%;
+    --foreground: 215 25% 27%;
+
+    --card: 0 0% 98%;
+    --card-foreground: 215 25% 27%;
+
+    --popover: 0 0% 98%;
+    --popover-foreground: 215 25% 27%;
+
+    --primary: 200 98% 39%;
+    --primary-foreground: 0 0% 98%;
+
+    --secondary: 210 40% 95%;
+    --secondary-foreground: 215 25% 27%;
+
+    --muted: 210 40% 95%;
+    --muted-foreground: 215 16% 47%;
+
+    --accent: 200 98% 39%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 200 98% 39%;
+
+    --radius: 0.75rem;
+
+    /* Portfolio-specific design tokens - Softer, warmer palette */
+    --hero-gradient: linear-gradient(135deg, hsl(200 98% 39%) 0%, hsl(210 100% 56%) 50%, hsl(220 100% 66%) 100%);
+    --tech-gradient: linear-gradient(90deg, hsl(200 98% 39% / 0.08) 0%, hsl(210 100% 56% / 0.04) 100%);
+    --glow-shadow: 0 0 20px hsl(200 98% 39% / 0.25);
+    --card-shadow: 0 4px 20px hsl(215 25% 27% / 0.08);
+    --timeline-glow: 0 0 15px hsl(200 98% 39% / 0.3);
+    
+    /* Animation variables */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+
+  .dark {
+    /* Professional dark theme - Softer, more approachable */
+    --background: 222 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222 84% 6%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222 84% 6%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 200 98% 39%;
+    --primary-foreground: 222 84% 4.9%;
+
+    --secondary: 217 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 200 98% 39%;
+    --accent-foreground: 222 84% 4.9%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 217 32.6% 17.5%;
+    --input: 217 32.6% 17.5%;
+    --ring: 200 98% 39%;
+
+    /* Enhanced portfolio tokens for dark theme - Warmer, softer glow */
+    --hero-gradient: linear-gradient(135deg, hsl(200 98% 39%) 0%, hsl(210 100% 56%) 50%, hsl(220 100% 66%) 100%);
+    --tech-gradient: linear-gradient(90deg, hsl(200 98% 39% / 0.12) 0%, hsl(210 100% 56% / 0.06) 100%);
+    --glow-shadow: 0 0 25px hsl(200 98% 39% / 0.3);
+    --card-shadow: 0 8px 32px hsl(222 84% 2% / 0.5);
+    --timeline-glow: 0 0 20px hsl(200 98% 39% / 0.4);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground transition-colors duration-300;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  /* Hero section styles */
+  .hero-text {
+    @apply bg-gradient-to-br from-foreground via-foreground to-muted-foreground bg-clip-text text-transparent;
+  }
+
+  .hero-gradient {
+    background: var(--hero-gradient);
+  }
+
+  .tech-gradient {
+    background: var(--tech-gradient);
+  }
+
+  /* Glow effects */
+  .glow-shadow {
+    box-shadow: var(--glow-shadow);
+  }
+
+  .card-shadow {
+    box-shadow: var(--card-shadow);
+  }
+
+  .timeline-glow {
+    box-shadow: var(--timeline-glow);
+  }
+
+  /* Smooth transitions */
+  .transition-smooth {
+    transition: var(--transition-smooth);
+  }
+
+  .transition-bounce {
+    transition: var(--transition-bounce);
+  }
+
+  /* Interactive elements - Softer, more approachable */
+  .skill-tag {
+    @apply bg-secondary/60 hover:bg-accent/15 border border-border hover:border-accent/40 transition-smooth hover:shadow-lg hover:scale-105 cursor-default;
+  }
+
+  .skill-tag:hover {
+    box-shadow: 0 10px 15px -3px hsl(200 98% 39% / 0.1), 0 4px 6px -2px hsl(200 98% 39% / 0.05);
+  }
+
+  .project-card {
+    @apply card-shadow hover:shadow-xl transition-smooth hover:-translate-y-1 hover:scale-[1.01];
+  }
+
+  .project-card:hover {
+    box-shadow: 0 25px 50px -12px hsl(200 98% 39% / 0.08);
+  }
+
+  .timeline-node {
+    @apply bg-accent shadow-lg transition-smooth hover:scale-110 hover:shadow-xl;
+  }
+
+  .timeline-node {
+    box-shadow: 0 10px 15px -3px hsl(200 98% 39% / 0.2), 0 4px 6px -2px hsl(200 98% 39% / 0.1);
+  }
+
+  .timeline-node:hover {
+    box-shadow: 0 25px 50px -12px hsl(200 98% 39% / 0.3), 0 10px 20px -5px hsl(200 98% 39% / 0.15);
+  }
+
+  /* Enhanced navbar styles */
+  .nav-link {
+    @apply relative overflow-hidden;
+  }
+
+  .nav-link::before {
+    content: '';
+    @apply absolute bottom-0 left-0 w-0 h-0.5 bg-accent transition-all duration-300;
+  }
+
+  .nav-link:hover::before {
+    @apply w-full;
+  }
+
+  /* Profile image enhancements */
+  .profile-image-container {
+    @apply relative;
+  }
+
+  .profile-image-container::before {
+    content: '';
+    @apply absolute inset-0 rounded-full bg-gradient-to-br from-accent/20 to-primary/20 opacity-0 transition-opacity duration-500;
+  }
+
+  .profile-image-container:hover::before {
+    @apply opacity-100;
+  }
+
+  /* Highlight cards animations - Gentler, more welcoming */
+  .highlight-card {
+    @apply relative overflow-hidden;
+  }
+
+  .highlight-card::before {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-br from-accent/8 to-primary/4 opacity-0 transition-all duration-400;
+  }
+
+  .highlight-card:hover::before {
+    @apply opacity-100;
+  }
+
+  .highlight-card:hover {
+    transform: translateY(-2px) scale(1.01);
+    box-shadow: 0 10px 40px hsl(200 98% 39% / 0.15);
+  }
+
+  /* Experience timeline enhancements */
+  .timeline-card {
+    @apply relative overflow-hidden;
+  }
+
+  .timeline-card::before {
+    content: '';
+    @apply absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-accent/0 via-accent/50 to-accent/0 transform -translate-y-full transition-transform duration-500;
+  }
+
+  .timeline-card:hover::before {
+    @apply translate-y-0;
+  }
+
+  /* Grid pattern background - Softer, more subtle */
+  .bg-grid-pattern {
+    background-image: radial-gradient(circle at 1px 1px, hsl(200 98% 39% / 0.08) 1px, transparent 0);
+    background-size: 24px 24px;
+  }
+
+  .dark .bg-grid-pattern {
+    background-image: radial-gradient(circle at 1px 1px, hsl(200 98% 39% / 0.12) 1px, transparent 0);
+  }
+
+  /* Enhanced timeline node */
+  .timeline-node {
+    @apply bg-accent shadow-lg shadow-accent/30 border-2 border-background;
+  }
+
+  .timeline-node:hover {
+    @apply shadow-xl shadow-accent/50;
+  }
+
+  /* Staggered animations */
+  .stagger-animation {
+    animation-fill-mode: both;
+  }
+
+  @keyframes slideInFromLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slideInFromRight {
+    from {
+      opacity: 0;
+      transform: translateX(50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+}
+
+@layer utilities {
+  .animate-fade-in {
+    animation: fadeIn 0.6s ease-out forwards;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.8s ease-out forwards;
+  }
+
+  .animate-scale-in {
+    animation: scaleIn 0.5s ease-out forwards;
+  }
+
+  /* Friendly color utilities */
+  .text-warm {
+    color: hsl(200 98% 39%);
+  }
+
+  .bg-warm {
+    background-color: hsl(200 98% 39% / 0.1);
+  }
+
+  .border-warm {
+    border-color: hsl(200 98% 39% / 0.3);
+  }
+
+  .shadow-warm {
+    box-shadow: 0 4px 20px hsl(200 98% 39% / 0.15);
+  }
+
+  .gradient-warm {
+    background: linear-gradient(135deg, hsl(200 98% 39% / 0.1) 0%, hsl(210 100% 56% / 0.05) 100%);
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes scaleIn {
+    from {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  /* Gentle pulse animation for friendly interactions */
+  @keyframes gentlePulse {
+    0%, 100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(1.02);
+      opacity: 0.9;
+    }
+  }
+
+  .animate-gentle-pulse {
+    animation: gentlePulse 2s ease-in-out infinite;
+  }
+}
