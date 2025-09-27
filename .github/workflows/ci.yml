@@ -3,11 +3,16 @@ name: Continuous Integration
 on:
   workflow_dispatch:
     inputs:
-      node_versions:
-        description: 'Node.js versions to test (comma-separated)'
+      test_node_18:
+        description: 'Test on Node.js 18.x'
         required: false
-        default: '18.x,20.x'
-        type: string
+        default: true
+        type: boolean
+      test_node_20:
+        description: 'Test on Node.js 20.x'
+        required: false
+        default: true
+        type: boolean
       run_security_audit:
         description: 'Run security audit'
         required: false
@@ -25,21 +30,17 @@ on:
         - critical
 
 jobs:
-  test:
+  test-node-18:
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: ${{ fromJson(format('["{0}"]', join(split(inputs.node_versions || '18.x,20.x', ','), '","'))) }}
-
+    if: ${{ inputs.test_node_18 }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup Node.js ${{ matrix.node-version }}
+      - name: Setup Node.js 18.x
         uses: actions/setup-node@v4
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: '18.x'
           cache: 'npm'
 
       - name: Install dependencies
@@ -56,7 +57,39 @@ jobs:
 
       - name: Check build size
         run: |
-          echo "Build completed successfully!"
+          echo "Build completed successfully on Node.js 18.x!"
+          du -sh dist/
+          echo "Build artifacts:"
+          ls -la dist/
+
+  test-node-20:
+    runs-on: ubuntu-latest
+    if: ${{ inputs.test_node_20 }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 20.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run linter
+        run: npm run lint
+
+      - name: Type check
+        run: npx tsc --noEmit
+
+      - name: Build project
+        run: npm run build
+
+      - name: Check build size
+        run: |
+          echo "Build completed successfully on Node.js 20.x!"
           du -sh dist/
           echo "Build artifacts:"
           ls -la dist/
